@@ -1,282 +1,47 @@
 <!DOCTYPE html>
-<html lang="lt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Damir Samarin - Istorijos pasakojimo menas, turinio kūrimas ir socialinis verslas">
-    <title>Damir Samarin - Istorijos pasakojimo menas</title>
+    <title>Your Page</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* General body and background */
         body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1e3c2f 0%, #2d5a3d 50%, #1a352b 100%);
-            color: #333;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
         }
 
-        /* macOS Notch */
-        .notch {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 30px;
-            background: #000;
-            border-radius: 0 0 15px 15px;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .notch::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: #333;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .notch::after {
-            content: '';
-            width: 12px;
-            height: 3px;
-            background: #333;
-            border-radius: 2px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px 120px;
-        }
-
-        /* macOS Dock */
-        .dock {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 15px 25px;
-            display: flex;
-            gap: 15px;
-            z-index: 1000;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .dock-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(46, 125, 50, 0.8);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dock-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
-            border-radius: 12px;
-        }
-
-        .dock-icon:hover {
-            transform: translateY(-10px) scale(1.1);
-            background: rgba(56, 142, 60, 0.9);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .dock-icon.active {
-            background: linear-gradient(135deg, #2e7d32, #388e3c);
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Pages */
-        .page {
-            min-height: 100vh;
-            padding: 80px 0 40px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .page.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* macOS Window Style */
-        .mac-window {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .mac-window::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background: rgba(248, 249, 250, 0.8);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .mac-buttons {
-            position: absolute;
-            top: 12px;
-            left: 20px;
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-
-        .mac-button {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-        }
-
-        .mac-button.red { background: #ff5f57; }
-        .mac-button.yellow { background: #ffbd2e; }
-        .mac-button.green { background: #28ca42; }
-
-        .window-content {
-            padding: 60px 60px 40px;
+        /* Headings */
+        h1, h2, h3, h4, h5, h6 {
+            color: #fff;
+            margin: 0 0 15px 0;
         }
 
         /* Hero Section */
         .hero {
+            padding: 80px 20px;
             text-align: center;
-            color: white;
-            padding: 100px 0;
-        }
-
-        .hero-image {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #2e7d32, #4caf50);
-            margin: 0 auto 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 90px;
-            color: white;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-            animation: float 6s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(-45deg);
-            animation: shine 3s ease-in-out infinite;
-        }
-
-        @keyframes shine {
-            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(-45deg); }
-            50% { transform: translateX(100%) translateY(100%) rotate(-45deg); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
         }
 
         .hero h1 {
             font-size: 4.5em;
-            margin-bottom: 20px;
             font-weight: 700;
-            background: linear-gradient(135deg, #fff, #e8f5e8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
+            color: #4caf50;
         }
 
         .hero p {
             font-size: 1.5em;
-            margin-bottom: 50px;
-            opacity: 0.9;
-            font-weight: 400;
+            color: #e0e0e0;
+            line-height: 1.6;
         }
 
-        .cta-button {
-            background: linear-gradient(135deg, #2e7d32, #4caf50);
-            color: white;
-            padding: 18px 45px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 15px 35px rgba(46, 125, 50, 0.3);
-            font-family: 'SF Pro Display', sans-serif;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 45px rgba(46, 125, 50, 0.4);
-            background: linear-gradient(135deg, #388e3c, #66bb6a);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 60px;
-            align-items: flex-start;
-        }
-
-        .about-stats {
-            display: grid;
-            gap: 25px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 35px 25px;
+        /* Stats Section */
+        .stat {
+            display: inline-block;
+            margin: 20px;
+            padding: 25px;
             border-radius: 20px;
             background: rgba(46, 125, 50, 0.1);
             border: 1px solid rgba(255,255,255,0.1);
@@ -296,6 +61,7 @@
             color: #1b3a1a;
         }
 
+        /* About Section */
         .about-text {
             font-size: 1.2em;
             line-height: 1.8;
@@ -398,21 +164,83 @@
             font-size: 0.95em;
         }
 
-        /* Body text adjustments */
-        body, 
-        .about-text p, 
+        /* ==== BODY TEXT ADJUSTMENT (Reduced & tighter) ==== */
+        p, 
+        .about-text, 
         .timeline-description, 
         .video-link-description, 
         .contact-content p, 
-        .skill-list li, 
-        .stat-label {
-            font-size: 70%; /* Reduce ~30% */
-            line-height: 0.95; /* Tighter line spacing */
+        .stat-label, 
+        .skill-item {
+            font-size: 0.8em;     /* ~20% smaller */
+            line-height: 1.1;     /* slightly tighter, readable */
         }
 
     </style>
 </head>
 <body>
-    <!-- Your HTML content here -->
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome</h1>
+        <p>This is the hero text. All body text will appear smaller and tighter.</p>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat">
+            <div class="stat-number">150</div>
+            <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">1200</div>
+            <div class="stat-label">Clients</div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <p class="about-text">This is some about text explaining your project or service.</p>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-date">2023</div>
+            <div class="timeline-title">Started Project</div>
+            <div class="timeline-description">This describes what happened during this timeline item.</div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills">
+        <div class="skills-content">
+            <div class="skill-item">HTML</div>
+            <div class="skill-item">CSS</div>
+            <div class="skill-item">JavaScript</div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video">
+        <div class="video-link">
+            <div class="video-link-title">Video Tutorial</div>
+            <div class="video-link-description">Description of the video goes here.</div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="contact-content">
+            <h2>Contact Me</h2>
+            <p>Email: example@example.com</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Your Name
+    </footer>
+
 </body>
 </html>
